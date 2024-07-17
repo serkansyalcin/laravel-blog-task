@@ -37,7 +37,7 @@
                                             </a>
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ Str::limit($post->content, 75) }}
+                                          {{ Str::limit(strip_tags($post->content), 75) }}
                                         </td>
                                     </tr>
                                 @endforeach
