@@ -8,10 +8,16 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    <div>
-                        <p>{{ $post->content }}</p>
+                <div class="flex mb-4">
+                    <img class="w-12 h-12 rounded-full" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"/>
+                    <div class="ml-3 mt-0.5">
+                      <span class="block font-medium text-base leading-snug text-black dark:text-gray-100">{{$post->user()->first()->name}}</span>
+                      <span class="block text-sm text-gray-500 dark:text-gray-400 font-light leading-snug">{{$post->created_at}}</span>
                     </div>
+                  </div>
+
+                <div class="px-5 py-4 bg-white dark:bg-gray-800 max-w-lg">
+                    <p>{!! $post->content !!}</p>
                 </div>
             </div>
         </div>

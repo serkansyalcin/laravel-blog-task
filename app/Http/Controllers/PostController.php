@@ -44,7 +44,7 @@ class PostController extends Controller
         $validatedData = $request->validateWithBag('createPost', [
             'title' => 'required',
             'slug' => 'required|unique:posts',
-            'content' => 'required',
+            'content' => 'required|string',
         ]);
 
         $slug = Str::slug($validatedData['title'], '-');
@@ -57,11 +57,13 @@ class PostController extends Controller
             $counter++;
         }
 
+        $sanitizedContent = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $validatedData['content']);
+
         Post::create([
             'user_id' => Auth::id(),
             'slug' => $slug,
             'title' => $validatedData['title'],
-            'content' => $validatedData['content'],
+            'content' => $sanitizedContent,
         ]);
 
         return redirect()->route('posts.index')->with('success', 'post-created');

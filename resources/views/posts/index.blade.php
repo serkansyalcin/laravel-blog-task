@@ -5,6 +5,7 @@
         </h2>
     </x-slot>
 
+    @if ($posts)
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
@@ -46,8 +47,21 @@
                       </div>
                     </div>
                     {{ $posts->links() }}
-                  </div>
+                </div>
             </div>
         </div>
     </div>
+    @else
+    <div class="p-5">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="mt-4"></div>
+
+            <div class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-md text-red-700 bg-red-100 border border-red-300 ">
+                <div class="text-xl font-normal  max-w-full flex-initial">
+                    No blog posts have been added yet
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 </x-public-layout>

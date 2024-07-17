@@ -27,12 +27,13 @@
 
                         <div>
                             <x-input-label for="content" :value="__('Content')" />
-                            <x-text-area id="content" name="content" type="text" class="mt-1 block w-full" autocomplete="content" />
+                            <x-text-area id="content" name="content" type="text" class="mt-1 block w-full min-h-48" autocomplete="content" />
                             <x-input-error :messages="$errors->createPost->get('content')" class="mt-2" />
                         </div>
 
                         <div class="flex items-center gap-4">
                             <x-primary-button>{{ __('Save') }}</x-primary-button>
+                            <x-secondary-button id="cancelPost">{{ __('Cancel') }}</x-secondary-button>
 
                             @if (session('status') === 'post-created')
                                 <p
@@ -55,6 +56,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var titleInput = document.getElementById('title');
     var slugInput = document.getElementById('slug');
+    var cancelPostInput = document.getElementById('cancelPost');
 
     titleInput.addEventListener('input', function() {
         var slug = this.value
@@ -63,5 +65,19 @@ document.addEventListener('DOMContentLoaded', function() {
             .replace(/^-+|-+$/g, '');
         slugInput.value = slug;
     });
+
+    cancelPostInput.addEventListener('click', function() {
+        window.location.href = '{{ route('dashboard') }}';
+    });
 });
+
+// Initialize CKEditor
+ClassicEditor
+    .create(document.querySelector('textarea'))
+    .then(editor => {
+        console.log('CKEditor initialized');
+    })
+    .catch(error => {
+        console.error('Error during initialization of the editor', error);
+    });
 </script>
