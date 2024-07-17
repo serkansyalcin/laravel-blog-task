@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var titleInput = document.getElementById('title');
     var slugInput = document.getElementById('slug');
 
-    titleInput.addEventListener('blur', function() {
+    titleInput.addEventListener('input', function() {
         var slug = this.value
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')

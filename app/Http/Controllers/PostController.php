@@ -16,6 +16,12 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
+    public function show($slug)
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        return view('posts.show', compact('post'));
+    }
+
     public function create(Request $request)
     {
         // Logic to check if user can create more blogs today (max 3)
