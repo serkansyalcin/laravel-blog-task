@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
 {
@@ -18,7 +19,10 @@ class PostController extends Controller
 
     public function show($slug)
     {
-        $post = Post::where('slug', $slug)->firstOrFail();
+        $post = Cache::remember("posts.{$slug}", 60, function () use ($slug) {
+            return Post::where('slug', $slug)->firstOrFail();
+        });
+
         return view('posts.show', compact('post'));
     }
 
