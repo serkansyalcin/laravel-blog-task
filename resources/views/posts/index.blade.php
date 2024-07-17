@@ -32,11 +32,11 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $post->id }}</td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             <a href="{{ route('posts.show', $post->slug) }}" class="text-indigo-600 hover:text-indigo-900">
-                                                {{ $post->title }}
+                                                {{ Str::limit($post->title, 100) }}
                                             </a>
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ Str::limit($post->content, 150) }}
+                                            {{ Str::limit($post->content, 75) }}
                                         </td>
                                     </tr>
                                 @endforeach
